@@ -3,8 +3,8 @@
     <div class="row text-center">
       <div class="col-12">
       <h1 class="text-center text-warning my-3"><u>Soul Harvester</u></h1>
-      <p class="text-danger">Click soul to harvest</p>
-      <img alt="Vue logo" class="shadow" src="https://darksouls.wiki.fextralife.com/file/Dark-Souls/2116.png" height="250px" @click="mine" />
+      <p class="text-danger">Click Hellkite dragon to harvest souls</p>
+      <img alt="Vue logo" class="shadow" src="https://vignette.wikia.nocookie.net/darksouls/images/a/a6/Hellkite_Wyvern_Render.png/revision/latest?cb=20130714154316" height="250px" @click="mine" />
       <h3 class="text-warning">Souls: {{Math.floor(souls)}}</h3>
       <button class="mx-1 my-1" v-for="item in upgrades" :key="item.name" @click="buy(item)"><img :src="item.imgUrl"/> <b><u>{{item.name}}</u></b>  <p>{{item.description}}</p>  <b><p class="text-success">${{Math.floor(item.cost)}}</p></b> (Quantity: {{item.quantity}})</button>
       </div>
