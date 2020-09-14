@@ -6,7 +6,7 @@
       <p class="text-danger">Click soul to harvest</p>
       <img alt="Vue logo" class="shadow" src="https://darksouls.wiki.fextralife.com/file/Dark-Souls/2116.png" height="250px" @click="mine" />
       <h3 class="text-warning">Souls: {{Math.floor(souls)}}</h3>
-      <button class="mx-1 my-1" v-for="item in upgrades" :key="item.name" @click="buy(item)"><img :src="item.imgUrl"/> <b><u>{{item.name}}</u> <p class="text-success">${{Math.floor(item.cost)}}</p></b> (Quantity: {{item.quantity}})</button>
+      <button class="mx-1 my-1" v-for="item in upgrades" :key="item.name" @click="buy(item)"><img :src="item.imgUrl"/> <b><u>{{item.name}}</u></b>  <p>{{item.description}}</p>  <b><p class="text-success">${{Math.floor(item.cost)}}</p></b> (Quantity: {{item.quantity}})</button>
       </div>
     </div>
   </div>
@@ -30,6 +30,7 @@
             cost: 20,
             multiplier: 1,
             quantity: 0,
+            description: "Adds +1 soul per click with each Dagger owned",
             click: true
           },
           claymore: {
@@ -38,6 +39,7 @@
             cost: 100,
             multiplier: 5,
             quantity: 0,
+            description: "Adds +5 souls per click with each Claymore owned",
             click: true
           },
           greatLordGreatsword: {
@@ -46,6 +48,7 @@
             cost: 10000,
             multiplier: 25,
             quantity: 0,
+            description: "Adds +25 souls per click with each GLG owned",
             click: true
           },
           
@@ -55,6 +58,7 @@
             cost: 50,
             multiplier: 1,
             quantity: 0,
+            description: "Adds +1 soul every 3 seconds with each Fireball owned",
             click: false
           },
           greatChaosFireball: {
@@ -63,6 +67,7 @@
             cost: 500,
             multiplier: 5,
             quantity: 0,
+            description: "Adds +5 souls every 3 seconds with each GCF owned",
             click: false
           }
         },
