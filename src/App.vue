@@ -81,14 +81,14 @@
                   <p>
                     <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
                     <br />
-                    / 3 seconds x {{ item.quantity }}
+                    / 2 seconds x {{ item.quantity }}
                   </p>
                   <p>
                     (Total:
                     <span class="soulNum"
                       >+{{ item.quantity * item.multiplier }}</span
                     >
-                    / 3 secs)
+                    / 2 secs)
                   </p>
                 </button>
               </div>
@@ -105,7 +105,7 @@ export default {
   mounted() {
     setInterval(() => {
       this.autoMine();
-    }, 3000);
+    }, 2000);
     if (localStorage.souls) {
       this.souls = localStorage.souls;
     }
@@ -137,8 +137,7 @@ export default {
           cost: 30,
           multiplier: 1,
           quantity: 0,
-          description: "Adds +1 soul every 3 seconds for each Fireball owned",
-          click: false,
+          description: "Adds +1 soul every 2 seconds for each Fireball owned",
         },
         poisonMist: {
           imgUrl:
@@ -148,18 +147,16 @@ export default {
           multiplier: 5,
           quantity: 0,
           description:
-            "Adds +5 souls every 3 seconds for each Poison Mist owned",
-          click: false,
+            "Adds +5 souls every 2 seconds for each Poison Mist owned",
         },
         greatChaosFireball: {
           imgUrl:
             "https://darksouls.wiki.fextralife.com/file/Dark-Souls/Great_Chaos_Fireball.png",
           name: "Great Chaos Fireball",
           cost: 1000,
-          multiplier: 10,
+          multiplier: 15,
           quantity: 0,
-          description: "Adds +10 souls every 3 seconds for each GCF owned",
-          click: false,
+          description: "Adds +15 souls every 2 seconds for each GCF owned",
         },
       },
       clickUpgrades: {
@@ -171,7 +168,6 @@ export default {
           multiplier: 1,
           quantity: 0,
           description: "Adds +1 soul per click for each Dagger owned",
-          click: true,
         },
         claymore: {
           imgUrl:
@@ -181,7 +177,6 @@ export default {
           multiplier: 5,
           quantity: 0,
           description: "Adds +5 souls per click for each Claymore owned",
-          click: true,
         },
         greatLordGreatsword: {
           imgUrl:
@@ -191,7 +186,6 @@ export default {
           multiplier: 25,
           quantity: 0,
           description: "Adds +25 souls per click for each GLG owned",
-          click: true,
         },
       },
     };
@@ -211,7 +205,7 @@ export default {
       if (item.cost <= this.souls) {
         this.souls -= item.cost;
         item.quantity++;
-        item.cost *= 1.25;
+        item.cost *= 1.15;
         this.saveAutoUpgrades();
         this.saveClickUpgrades();
       }
@@ -233,9 +227,7 @@ export default {
       let total = 0;
       for (let key in this.clickUpgrades) {
         let upgrade = this.clickUpgrades[key];
-        if (upgrade.click) {
-          total += upgrade.multiplier * upgrade.quantity;
-        }
+        total += upgrade.multiplier * upgrade.quantity;
       }
       return total;
     },
@@ -243,9 +235,7 @@ export default {
       let total = 0;
       for (let key in this.autoUpgrades) {
         let upgrade = this.autoUpgrades[key];
-        if (!upgrade.click) {
-          total += upgrade.multiplier * upgrade.quantity;
-        }
+        total += upgrade.multiplier * upgrade.quantity;
       }
       return total;
     },
