@@ -177,6 +177,7 @@ export default {
       },
     };
   },
+
   methods: {
     mine() {
       this.souls++;
@@ -192,9 +193,22 @@ export default {
         this.souls -= item.cost;
         item.quantity++;
         item.cost *= 1.25;
+        this.saveAutoUpgrades();
+        this.saveClickUpgrades();
       }
     },
+
+    saveAutoUpgrades() {
+      const parsed = JSON.stringify(this.autoUpgrades);
+      localStorage.setItem("autoUpgrades", parsed);
+    },
+
+    saveClickUpgrades() {
+      const parsed = JSON.stringify(this.clickUpgrades);
+      localStorage.setItem("clickUpgrades", parsed);
+    },
   },
+
   computed: {
     clickModifiersTotal() {
       let total = 0;
@@ -215,6 +229,34 @@ export default {
         }
       }
       return total;
+    },
+  },
+
+  mounted() {
+    if (localStorage.souls) {
+      this.souls = localStorage.souls;
+    }
+
+    if (localStorage.getItem("autoUpgrades")) {
+      try {
+        this.autoUpgrades = JSON.parse(localStorage.getItem("autoUpgrades"));
+      } catch (e) {
+        localStorage.removeItem("autoUpgrades");
+      }
+    }
+
+    if (localStorage.getItem("clickUpgrades")) {
+      try {
+        this.clickUpgrades = JSON.parse(localStorage.getItem("clickUpgrades"));
+      } catch (e) {
+        localStorage.removeItem("clickUpgrades");
+      }
+    }
+  },
+
+  watch: {
+    souls(newSouls) {
+      localStorage.souls = newSouls;
     },
   },
 };
