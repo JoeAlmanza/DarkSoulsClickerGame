@@ -106,6 +106,25 @@ export default {
     setInterval(() => {
       this.autoMine();
     }, 3000);
+    if (localStorage.souls) {
+      this.souls = localStorage.souls;
+    }
+
+    if (localStorage.getItem("autoUpgrades")) {
+      try {
+        this.autoUpgrades = JSON.parse(localStorage.getItem("autoUpgrades"));
+      } catch (e) {
+        localStorage.removeItem("autoUpgrades");
+      }
+    }
+
+    if (localStorage.getItem("clickUpgrades")) {
+      try {
+        this.clickUpgrades = JSON.parse(localStorage.getItem("clickUpgrades"));
+      } catch (e) {
+        localStorage.removeItem("clickUpgrades");
+      }
+    }
   },
   data() {
     return {
@@ -230,28 +249,6 @@ export default {
       }
       return total;
     },
-  },
-
-  mounted() {
-    if (localStorage.souls) {
-      this.souls = localStorage.souls;
-    }
-
-    if (localStorage.getItem("autoUpgrades")) {
-      try {
-        this.autoUpgrades = JSON.parse(localStorage.getItem("autoUpgrades"));
-      } catch (e) {
-        localStorage.removeItem("autoUpgrades");
-      }
-    }
-
-    if (localStorage.getItem("clickUpgrades")) {
-      try {
-        this.clickUpgrades = JSON.parse(localStorage.getItem("clickUpgrades"));
-      } catch (e) {
-        localStorage.removeItem("clickUpgrades");
-      }
-    }
   },
 
   watch: {
