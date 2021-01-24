@@ -102,30 +102,6 @@
 
 <script>
 export default {
-  mounted() {
-    setInterval(() => {
-      this.autoMine();
-    }, 2000);
-    if (localStorage.souls) {
-      this.souls = localStorage.souls;
-    }
-
-    if (localStorage.getItem("autoUpgrades")) {
-      try {
-        this.autoUpgrades = JSON.parse(localStorage.getItem("autoUpgrades"));
-      } catch (e) {
-        localStorage.removeItem("autoUpgrades");
-      }
-    }
-
-    if (localStorage.getItem("clickUpgrades")) {
-      try {
-        this.clickUpgrades = JSON.parse(localStorage.getItem("clickUpgrades"));
-      } catch (e) {
-        localStorage.removeItem("clickUpgrades");
-      }
-    }
-  },
   data() {
     return {
       souls: 0,
@@ -191,6 +167,51 @@ export default {
     };
   },
 
+  computed: {
+    clickModifiersTotal() {
+      let total = 0;
+      for (let key in this.clickUpgrades) {
+        let upgrade = this.clickUpgrades[key];
+        total += upgrade.multiplier * upgrade.quantity;
+      }
+      return total;
+    },
+    autoModifiersTotal() {
+      let total = 0;
+      for (let key in this.autoUpgrades) {
+        let upgrade = this.autoUpgrades[key];
+        total += upgrade.multiplier * upgrade.quantity;
+      }
+      return total;
+    },
+  },
+
+  mounted() {
+    if (localStorage.souls) {
+      this.souls = localStorage.souls;
+      this.souls++;
+    }
+
+    if (localStorage.getItem("autoUpgrades")) {
+      try {
+        this.autoUpgrades = JSON.parse(localStorage.getItem("autoUpgrades"));
+      } catch (e) {
+        localStorage.removeItem("autoUpgrades");
+      }
+    }
+
+    if (localStorage.getItem("clickUpgrades")) {
+      try {
+        this.clickUpgrades = JSON.parse(localStorage.getItem("clickUpgrades"));
+      } catch (e) {
+        localStorage.removeItem("clickUpgrades");
+      }
+    }
+
+    setInterval(() => {
+      this.autoMine();
+    }, 2000);
+  },
   methods: {
     mine() {
       this.souls++;
@@ -222,28 +243,9 @@ export default {
     },
   },
 
-  computed: {
-    clickModifiersTotal() {
-      let total = 0;
-      for (let key in this.clickUpgrades) {
-        let upgrade = this.clickUpgrades[key];
-        total += upgrade.multiplier * upgrade.quantity;
-      }
-      return total;
-    },
-    autoModifiersTotal() {
-      let total = 0;
-      for (let key in this.autoUpgrades) {
-        let upgrade = this.autoUpgrades[key];
-        total += upgrade.multiplier * upgrade.quantity;
-      }
-      return total;
-    },
-  },
-
   watch: {
-    souls(newSouls) {
-      localStorage.souls = newSouls;
+    souls(souls) {
+      localStorage.souls = souls;
     },
   },
 };
