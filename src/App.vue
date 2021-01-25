@@ -18,19 +18,19 @@
           Souls:
           <span class="text-dark soulNum"> {{ Math.floor(souls) }}</span>
         </h2>
-        <div class="row">
+        <div class="row justify-content-center">
           <!-- CLICK UPGRADES START -->
-          <div class="col-5">
+          <div class="col-6 col-md-5 order-2 order-md-1">
             <div class="row justify-content-center">
               <h2 class="text-center text-danger text-shadow">
                 Click Upgrades
               </h2>
               <div class="col-12">
-                <div
+                <span
                   @mouseover="clickHover = true"
                   @mouseleave="clickHover = false"
                 >
-                  <div v-if="!clickHover">
+                  <span v-if="!clickHover">
                     <button
                       class="m-1"
                       v-for="item in clickUpgrades"
@@ -48,10 +48,13 @@
                       >
                       <br />
                       <b class="itemBonus soulNum">+{{ item.multiplier }}</b
-                      ><b> x {{ item.quantity }}</b>
+                      ><b>
+                        x
+                        <span class="equippedAmt">{{ item.quantity }}</span></b
+                      >
                     </button>
-                  </div>
-                  <div v-if="clickHover">
+                  </span>
+                  <span v-if="clickHover">
                     <button
                       class="m-1"
                       v-for="item in clickUpgrades"
@@ -64,27 +67,40 @@
                         ${{ Math.floor(item.cost) }}</b
                       >
                       <br />
-                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
-                      <p>every click x {{ item.quantity }}</p>
+                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b
+                      ><b>
+                        x
+                        <span class="equippedAmt">{{ item.quantity }}</span></b
+                      >
+                      <br />
+                      <b>/ click</b>
+                      <br />
                       <p>
-                        (Grants:
+                        (Total:
                         <span class="soulNum"
                           >+{{ item.quantity * item.multiplier }}</span
                         >
-                        every click)
+                        / click)
                       </p>
                     </button>
-                  </div>
-                </div>
+                  </span>
+                </span>
               </div>
+              <h2 class="text-center text-danger text-shadow">
+                Total:
+                <span class="text-dark soulNum">{{
+                  this.clickModifiersTotal
+                }}</span>
+                / click
+              </h2>
             </div>
           </div>
           <!-- CLICK UPGRADES END -->
           <!-- EQUIPMENT UPGRADES START -->
-          <div class="col-2">
-            <h4 class="text-danger text-shadow mt-4">Equipment</h4>
-            <div v-if="!this.equipment.covetousSilverSerpentRing.equipped">
-              <div
+          <div class="col-12 col-md-2 order-1 order-md-2">
+            <h3 class="text-danger text-shadow mt-4">Equipment</h3>
+            <span v-if="!this.equipment.covetousSilverSerpentRing.equipped">
+              <span
                 @mouseover="equipmentHover = true"
                 @mouseleave="equipmentHover = false"
               >
@@ -96,21 +112,21 @@
                 >
                   <img class="btnImg" :src="item.imgUrl" />
                   <br />
-                  <b
-                    ><u>{{ item.name }}</u></b
-                  >
-                  <br />
-                  <div v-if="equipmentHover">
+                  <span v-if="equipmentHover">
+                    <b
+                      ><u>{{ item.name }}</u></b
+                    >
+                    <br />
                     <p>{{ item.description }}</p>
-                  </div>
+                  </span>
                   <b class="text-success price">
                     ${{ Math.floor(item.cost) }}</b
                   >
                 </button>
-              </div>
-            </div>
-            <div v-else>
-              <div
+              </span>
+            </span>
+            <span v-else>
+              <span
                 @mouseover="equipmentHover = true"
                 @mouseleave="equipmentHover = false"
               >
@@ -121,21 +137,21 @@
                 >
                   <img class="btnImg" :src="item.imgUrl" />
                   <br />
-                  <b
-                    ><u>{{ item.name }}</u></b
-                  >
-                  <br />
-                  <div v-if="equipmentHover">
-                    <p>{{ item.description }}</p>
-                  </div>
                   <b class="text-warning"> Equipped </b>
+                  <span v-if="equipmentHover">
+                    <b
+                      ><u>{{ item.name }}</u></b
+                    >
+                    <br />
+                    <p>{{ item.description }}</p>
+                  </span>
                 </button>
-              </div>
-            </div>
+              </span>
+            </span>
           </div>
           <!-- EQUIPMENT UPGRADES END -->
           <!-- AUTO UPGRADES START -->
-          <div class="col-5">
+          <div class="col-6 col-md-5 order-3">
             <div class="row justify-content-center">
               <h2 class="text-center text-danger text-shadow">Auto Upgrades</h2>
               <div class="col-12">
@@ -161,7 +177,10 @@
                       >
                       <br />
                       <b class="itemBonus soulNum">+{{ item.multiplier }} </b>
-                      <b>x {{ item.quantity }}</b>
+                      <b
+                        >x
+                        <span class="equippedAmt">{{ item.quantity }}</span></b
+                      >
                     </button>
                   </div>
                   <div v-if="autoHover">
@@ -177,19 +196,32 @@
                         ${{ Math.floor(item.cost) }}</b
                       >
                       <br />
-                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
-                      <p>every 2 seconds x {{ item.quantity }}</p>
+                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b
+                      ><b>
+                        x
+                        <span class="equippedAmt">{{ item.quantity }}</span></b
+                      >
+                      <br />
+                      <b>/ 2 seconds</b>
+                      <br />
                       <p>
-                        (Grants:
+                        (Total:
                         <span class="soulNum"
                           >+{{ item.quantity * item.multiplier }}</span
                         >
-                        every 2 seconds)
+                        / 2 seconds)
                       </p>
                     </button>
                   </div>
                 </div>
               </div>
+              <h2 class="text-center text-danger text-shadow">
+                Total:
+                <span class="text-dark soulNum">{{
+                  this.autoModifiersTotal
+                }}</span>
+                / 2 seconds
+              </h2>
             </div>
           </div>
           <!-- AUTO UPGRADES END -->
@@ -215,7 +247,7 @@ export default {
           name: "Covetous Silver Serpent Ring",
           cost: 1000000,
           equipped: false,
-          description: "Grants 20% more souls",
+          description: "Grants 20% more souls gained",
         },
       },
       autoUpgrades: {
@@ -429,11 +461,15 @@ button {
   border-radius: 5px;
   box-shadow: 2px 2px #6e6e6e, -2px -2px #6e6e6e, 2px -2px #6e6e6e,
     -2px 2px #6e6e6e;
-  width: 150px;
+  width: 115px;
 }
 
 button:hover {
   border: 4px solid #d4c32a;
+}
+
+button:active {
+  border: 4px solid black;
 }
 
 .btnImg {
@@ -466,5 +502,10 @@ button:hover {
 
 .equippedItem {
   border: 3px solid #d4c32a;
+}
+
+.equippedAmt {
+  color: #d4c32a;
+  text-shadow: 1px 1px black, 1px -1px black, -1px -1px black, -1px 1px black;
 }
 </style>
