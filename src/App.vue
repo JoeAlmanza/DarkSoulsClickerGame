@@ -27,7 +27,7 @@
               </h2>
               <div class="col-12">
                 <span
-                  @mouseover="clickHover = true"
+                  @mouseover="isMobile ? null : (clickHover = true)"
                   @mouseleave="clickHover = false"
                 >
                   <span v-if="!clickHover">
@@ -101,7 +101,7 @@
             <h3 class="text-danger text-shadow mt-4">Equipment</h3>
             <span v-if="!this.equipment.covetousSilverSerpentRing.equipped">
               <span
-                @mouseover="equipmentHover = true"
+                @mouseover="isMobile ? null : (equipmentHover = true)"
                 @mouseleave="equipmentHover = false"
               >
                 <button
@@ -128,7 +128,7 @@
             </span>
             <span v-else>
               <span
-                @mouseover="equipmentHover = true"
+                @mouseover="isMobile ? null : (equipmentHover = true)"
                 @mouseleave="equipmentHover = false"
               >
                 <button
@@ -157,7 +157,7 @@
               <h2 class="text-center text-danger text-shadow">Auto Upgrades</h2>
               <div class="col-12">
                 <div
-                  @mouseover="autoHover = true"
+                  @mouseover="isMobile ? null : (autoHover = true)"
                   @mouseleave="autoHover = false"
                 >
                   <div v-if="!autoHover">
@@ -236,6 +236,7 @@
 export default {
   data() {
     return {
+      isMobile: false,
       clickHover: false,
       equipmentHover: false,
       autoHover: false,
@@ -415,6 +416,10 @@ export default {
     saveEquipment() {
       const parsed = JSON.stringify(this.equipment);
       localStorage.setItem("equipment", parsed);
+    },
+
+    mq() {
+      this.isMobile = window.matchMedia("(max-width: 400px)").matches;
     },
   },
 
