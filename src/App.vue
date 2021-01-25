@@ -101,7 +101,7 @@
             <h3 class="text-danger text-shadow mt-4">Equipment</h3>
             <span v-if="!this.equipment.covetousSilverSerpentRing.equipped">
               <span
-                @mouseover="isMobile ? null : (equipmentHover = true)"
+                @mouseover="equipmentHover = true"
                 @mouseleave="equipmentHover = false"
               >
                 <button
@@ -419,7 +419,7 @@ export default {
     },
 
     mq() {
-      this.isMobile = window.matchMedia("(max-width: 400px)").matches;
+      this.isMobile = window.matchMedia("(max-width: 420px)").matches;
     },
   },
 
