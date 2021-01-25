@@ -426,6 +426,10 @@ export default {
 </script>
 
 <style>
+container-fluid {
+  touch-action: manipulation;
+}
+
 body {
   background-image: url("https://i.imgur.com/6KTwz4W.gif");
   background-size: cover;
@@ -434,7 +438,6 @@ body {
   background-attachment: fixed;
   height: 100vh;
   font-family: Garamond, serif;
-  touch-action: manipulation;
 }
 
 img {
