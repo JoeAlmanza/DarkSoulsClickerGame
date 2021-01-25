@@ -26,8 +26,11 @@
                 Click Upgrades
               </h2>
               <div class="col-12">
-                <span @mouseover="hover = true" @mouseleave="hover = false">
-                  <span v-if="!hover">
+                <div
+                  @mouseover="clickHover = true"
+                  @mouseleave="clickHover = false"
+                >
+                  <div v-if="!clickHover">
                     <button
                       class="m-1"
                       v-for="item in clickUpgrades"
@@ -46,8 +49,8 @@
                       <br />
                       <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
                     </button>
-                  </span>
-                  <span v-if="hover">
+                  </div>
+                  <div v-if="clickHover">
                     <button
                       class="m-1"
                       v-for="item in clickUpgrades"
@@ -70,8 +73,8 @@
                         / click)
                       </p>
                     </button>
-                  </span>
-                </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -80,7 +83,10 @@
           <div class="col-2">
             <h4 class="text-danger text-shadow mt-4">Equipment</h4>
             <div v-if="!this.equipment.covetousSilverSerpentRing.equipped">
-              <span @mouseover="hover = true" @mouseleave="hover = false">
+              <div
+                @mouseover="equipmentHover = true"
+                @mouseleave="equipmentHover = false"
+              >
                 <button
                   class="m-1"
                   v-for="item in equipment"
@@ -93,17 +99,20 @@
                     ><u>{{ item.name }}</u></b
                   >
                   <br />
-                  <span v-if="hover">
+                  <div v-if="equipmentHover">
                     <p>{{ item.description }}</p>
-                  </span>
+                  </div>
                   <b class="text-success price">
                     ${{ Math.floor(item.cost) }}</b
                   >
                 </button>
-              </span>
+              </div>
             </div>
             <div v-else>
-              <span @mouseover="hover = true" @mouseleave="hover = false">
+              <div
+                @mouseover="equipmentHover = true"
+                @mouseleave="equipmentHover = false"
+              >
                 <button
                   class="m-1 equippedItem"
                   v-for="item in equipment"
@@ -115,12 +124,12 @@
                     ><u>{{ item.name }}</u></b
                   >
                   <br />
-                  <span v-if="hover">
+                  <div v-if="equipmentHover">
                     <p>{{ item.description }}</p>
-                  </span>
+                  </div>
                   <b class="text-warning"> Equipped </b>
                 </button>
-              </span>
+              </div>
             </div>
           </div>
           <!-- EQUIPMENT UPGRADES END -->
@@ -129,8 +138,11 @@
             <div class="row justify-content-center">
               <h2 class="text-center text-danger text-shadow">Auto Upgrades</h2>
               <div class="col-12">
-                <span @mouseover="hover = true" @mouseleave="hover = false">
-                  <span v-if="!hover">
+                <div
+                  @mouseover="autoHover = true"
+                  @mouseleave="autoHover = false"
+                >
+                  <div v-if="!autoHover">
                     <button
                       class="m-1"
                       v-for="item in autoUpgrades"
@@ -149,8 +161,8 @@
                       <br />
                       <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
                     </button>
-                  </span>
-                  <span v-if="hover">
+                  </div>
+                  <div v-if="autoHover">
                     <button
                       class="m-1"
                       v-for="item in autoUpgrades"
@@ -173,8 +185,8 @@
                         / 2 seconds)
                       </p>
                     </button>
-                  </span>
-                </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -189,6 +201,9 @@
 export default {
   data() {
     return {
+      clickHover: false,
+      equipmentHover: false,
+      autoHover: false,
       hover: false,
       souls: 0,
       equipment: {
@@ -415,6 +430,10 @@ button {
   width: 150px;
 }
 
+button:hover {
+  border: 4px solid #d4c32a;
+}
+
 .btnImg {
   max-height: 7vh;
   padding-top: 0;
@@ -444,6 +463,6 @@ button {
 }
 
 .equippedItem {
-  border: 3px solid rgb(212, 195, 42);
+  border: 3px solid #d4c32a;
 }
 </style>
