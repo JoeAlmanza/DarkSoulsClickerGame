@@ -480,6 +480,7 @@ button:active {
 
 .mainImg {
   border-radius: 50%;
+  touch-action: manipulation;
 }
 
 .price {
