@@ -47,7 +47,8 @@
                         ${{ Math.floor(item.cost) }}</b
                       >
                       <br />
-                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
+                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b
+                      ><b> x {{ item.quantity }}</b>
                     </button>
                   </div>
                   <div v-if="clickHover">
@@ -64,13 +65,13 @@
                       >
                       <br />
                       <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
-                      <p>/ click x {{ item.quantity }}</p>
+                      <p>every click x {{ item.quantity }}</p>
                       <p>
-                        (Total:
+                        (Grants:
                         <span class="soulNum"
                           >+{{ item.quantity * item.multiplier }}</span
                         >
-                        / click)
+                        every click)
                       </p>
                     </button>
                   </div>
@@ -159,7 +160,8 @@
                         ${{ Math.floor(item.cost) }}</b
                       >
                       <br />
-                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
+                      <b class="itemBonus soulNum">+{{ item.multiplier }} </b>
+                      <b>x {{ item.quantity }}</b>
                     </button>
                   </div>
                   <div v-if="autoHover">
@@ -176,13 +178,13 @@
                       >
                       <br />
                       <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
-                      <p>/ 2 seconds x {{ item.quantity }}</p>
+                      <p>every 2 seconds x {{ item.quantity }}</p>
                       <p>
-                        (Total:
+                        (Grants:
                         <span class="soulNum"
                           >+{{ item.quantity * item.multiplier }}</span
                         >
-                        / 2 seconds)
+                        every 2 seconds)
                       </p>
                     </button>
                   </div>
@@ -243,7 +245,7 @@ export default {
           cost: 7500,
           multiplier: 25,
           quantity: 0,
-          description: "Adds +15 souls every 2 seconds for each GCF owned",
+          description: "Adds +25 souls every 2 seconds for each GCF owned",
         },
       },
       clickUpgrades: {
