@@ -115,6 +115,7 @@
                   <b class="text-success price">
                     ${{ Math.floor(item.cost) }}</b
                   >
+                  <br />
                   <span v-if="equipmentHover">
                     <b
                       ><u>{{ item.name }}</u></b
