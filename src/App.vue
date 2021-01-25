@@ -19,17 +19,73 @@
           <span class="text-dark soulNum"> {{ Math.floor(souls) }}</span>
         </h2>
         <div class="row">
-          <div class="col-6">
+          <!-- CLICK UPGRADES START -->
+          <div class="col-5">
             <div class="row justify-content-center">
               <h2 class="text-center text-danger text-shadow">
                 Click Upgrades
               </h2>
               <div class="col-12">
+                <span @mouseover="hover = true" @mouseleave="hover = false">
+                  <span v-if="!hover">
+                    <button
+                      class="m-1"
+                      v-for="item in clickUpgrades"
+                      :key="item.name"
+                      @click="buy(item)"
+                    >
+                      <img class="btnImg" :src="item.imgUrl" />
+                      <br />
+                      <b
+                        ><u>{{ item.name }}</u></b
+                      >
+                      <br />
+                      <b class="text-success price">
+                        ${{ Math.floor(item.cost) }}</b
+                      >
+                      <br />
+                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
+                    </button>
+                  </span>
+                  <span v-if="hover">
+                    <button
+                      class="m-1"
+                      v-for="item in clickUpgrades"
+                      :key="item.name"
+                      @click="buy(item)"
+                    >
+                      <img class="btnImg" :src="item.imgUrl" />
+                      <br />
+                      <b class="text-success price">
+                        ${{ Math.floor(item.cost) }}</b
+                      >
+                      <br />
+                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
+                      <p>/ click x {{ item.quantity }}</p>
+                      <p>
+                        (Total:
+                        <span class="soulNum"
+                          >+{{ item.quantity * item.multiplier }}</span
+                        >
+                        / click)
+                      </p>
+                    </button>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <!-- CLICK UPGRADES END -->
+          <!-- EQUIPMENT UPGRADES START -->
+          <div class="col-2">
+            <h4 class="text-danger text-shadow mt-4">Equipment</h4>
+            <div v-if="!this.equipment.covetousSilverSerpentRing.equipped">
+              <span @mouseover="hover = true" @mouseleave="hover = false">
                 <button
-                  class="mx-1 my-1"
-                  v-for="item in clickUpgrades"
+                  class="m-1"
+                  v-for="item in equipment"
                   :key="item.name"
-                  @click="buy(item)"
+                  @click="equip(item)"
                 >
                   <img class="btnImg" :src="item.imgUrl" />
                   <br />
@@ -37,63 +93,92 @@
                     ><u>{{ item.name }}</u></b
                   >
                   <br />
+                  <span v-if="hover">
+                    <p>{{ item.description }}</p>
+                  </span>
                   <b class="text-success price">
                     ${{ Math.floor(item.cost) }}</b
                   >
-                  <br />
-                  <p>
-                    <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
-                    <br />
-                    / click x {{ item.quantity }}
-                  </p>
-                  <p>
-                    (Total:
-                    <span class="soulNum"
-                      >+{{ item.quantity * item.multiplier }}</span
-                    >
-                    / click)
-                  </p>
                 </button>
-              </div>
+              </span>
+            </div>
+            <div v-else>
+              <span @mouseover="hover = true" @mouseleave="hover = false">
+                <button
+                  class="m-1 equippedItem"
+                  v-for="item in equipment"
+                  :key="item.name"
+                >
+                  <img class="btnImg" :src="item.imgUrl" />
+                  <br />
+                  <b
+                    ><u>{{ item.name }}</u></b
+                  >
+                  <br />
+                  <span v-if="hover">
+                    <p>{{ item.description }}</p>
+                  </span>
+                  <b class="text-warning"> Equipped </b>
+                </button>
+              </span>
             </div>
           </div>
-
-          <div class="col-6">
+          <!-- EQUIPMENT UPGRADES END -->
+          <!-- AUTO UPGRADES START -->
+          <div class="col-5">
             <div class="row justify-content-center">
               <h2 class="text-center text-danger text-shadow">Auto Upgrades</h2>
               <div class="col-12">
-                <button
-                  class="mx-1 my-1"
-                  v-for="item in autoUpgrades"
-                  :key="item.name"
-                  @click="buy(item)"
-                >
-                  <img class="btnImg" :src="item.imgUrl" />
-                  <br />
-                  <b
-                    ><u>{{ item.name }}</u></b
-                  >
-                  <br />
-                  <b class="text-success price">
-                    ${{ Math.floor(item.cost) }}</b
-                  >
-                  <br />
-                  <p>
-                    <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
-                    <br />
-                    / 2 seconds x {{ item.quantity }}
-                  </p>
-                  <p>
-                    (Total:
-                    <span class="soulNum"
-                      >+{{ item.quantity * item.multiplier }}</span
+                <span @mouseover="hover = true" @mouseleave="hover = false">
+                  <span v-if="!hover">
+                    <button
+                      class="m-1"
+                      v-for="item in autoUpgrades"
+                      :key="item.name"
+                      @click="buy(item)"
                     >
-                    / 2 secs)
-                  </p>
-                </button>
+                      <img class="btnImg" :src="item.imgUrl" />
+                      <br />
+                      <b
+                        ><u>{{ item.name }}</u></b
+                      >
+                      <br />
+                      <b class="text-success price">
+                        ${{ Math.floor(item.cost) }}</b
+                      >
+                      <br />
+                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
+                    </button>
+                  </span>
+                  <span v-if="hover">
+                    <button
+                      class="m-1"
+                      v-for="item in autoUpgrades"
+                      :key="item.name"
+                      @click="buy(item)"
+                    >
+                      <img class="btnImg" :src="item.imgUrl" />
+                      <br />
+                      <b class="text-success price">
+                        ${{ Math.floor(item.cost) }}</b
+                      >
+                      <br />
+                      <b class="itemBonus soulNum">+{{ item.multiplier }}</b>
+                      <p>/ 2 seconds x {{ item.quantity }}</p>
+                      <p>
+                        (Total:
+                        <span class="soulNum"
+                          >+{{ item.quantity * item.multiplier }}</span
+                        >
+                        / 2 seconds)
+                      </p>
+                    </button>
+                  </span>
+                </span>
               </div>
             </div>
           </div>
+          <!-- AUTO UPGRADES END -->
         </div>
       </div>
     </div>
@@ -104,13 +189,24 @@
 export default {
   data() {
     return {
+      hover: false,
       souls: 0,
+      equipment: {
+        covetousSilverSerpentRing: {
+          imgUrl:
+            "https://darksouls.wiki.fextralife.com/file/Dark-Souls/4022.png",
+          name: "Covetous Silver Serpent Ring",
+          cost: 1000000,
+          equipped: false,
+          description: "Grants 20% more souls",
+        },
+      },
       autoUpgrades: {
         fireball: {
           imgUrl:
             "https://darksouls.wiki.fextralife.com/file/Dark-Souls/Fireball.png",
           name: "Fireball",
-          cost: 30,
+          cost: 100,
           multiplier: 1,
           quantity: 0,
           description: "Adds +1 soul every 2 seconds for each Fireball owned",
@@ -119,7 +215,7 @@ export default {
           imgUrl:
             "https://darksouls.wiki.fextralife.com/file/Dark-Souls/Poison_Mist.png",
           name: "Poison Mist",
-          cost: 500,
+          cost: 1000,
           multiplier: 5,
           quantity: 0,
           description:
@@ -129,8 +225,8 @@ export default {
           imgUrl:
             "https://darksouls.wiki.fextralife.com/file/Dark-Souls/Great_Chaos_Fireball.png",
           name: "Great Chaos Fireball",
-          cost: 1000,
-          multiplier: 15,
+          cost: 7500,
+          multiplier: 25,
           quantity: 0,
           description: "Adds +15 souls every 2 seconds for each GCF owned",
         },
@@ -140,7 +236,7 @@ export default {
           imgUrl:
             "https://darksouls.wiki.fextralife.com/file/Dark-Souls/Wpn_Dagger.png",
           name: "Dagger",
-          cost: 10,
+          cost: 30,
           multiplier: 1,
           quantity: 0,
           description: "Adds +1 soul per click for each Dagger owned",
@@ -158,7 +254,7 @@ export default {
           imgUrl:
             "https://darksouls.wiki.fextralife.com/file/Dark-Souls/great_lord_greatsword_1.png",
           name: "Great Lord Greatsword",
-          cost: 10000,
+          cost: 5000,
           multiplier: 25,
           quantity: 0,
           description: "Adds +25 souls per click for each GLG owned",
@@ -208,6 +304,14 @@ export default {
       }
     }
 
+    if (localStorage.getItem("equipment")) {
+      try {
+        this.equipment = JSON.parse(localStorage.getItem("equipment"));
+      } catch (e) {
+        localStorage.removeItem("equipment");
+      }
+    }
+
     setInterval(() => {
       this.autoMine();
     }, 2000);
@@ -215,11 +319,19 @@ export default {
   methods: {
     mine() {
       this.souls++;
-      this.souls += this.clickModifiersTotal;
+      if (this.equipment.covetousSilverSerpentRing.equipped) {
+        this.souls += this.clickModifiersTotal * 1.2;
+      } else {
+        this.souls += this.clickModifiersTotal;
+      }
     },
 
     autoMine() {
-      this.souls += this.autoModifiersTotal;
+      if (this.equipment.covetousSilverSerpentRing.equipped) {
+        this.souls += this.autoModifiersTotal * 1.2;
+      } else {
+        this.souls += this.autoModifiersTotal;
+      }
     },
 
     buy(item) {
@@ -232,6 +344,14 @@ export default {
       }
     },
 
+    equip(item) {
+      if (item.cost <= this.souls) {
+        this.souls -= item.cost;
+        item.equipped = true;
+        this.saveEquipment();
+      }
+    },
+
     saveAutoUpgrades() {
       const parsed = JSON.stringify(this.autoUpgrades);
       localStorage.setItem("autoUpgrades", parsed);
@@ -240,6 +360,11 @@ export default {
     saveClickUpgrades() {
       const parsed = JSON.stringify(this.clickUpgrades);
       localStorage.setItem("clickUpgrades", parsed);
+    },
+
+    saveEquipment() {
+      const parsed = JSON.stringify(this.equipment);
+      localStorage.setItem("equipment", parsed);
     },
   },
 
@@ -316,5 +441,9 @@ button {
 
 .itemBonus {
   font-size: 14pt;
+}
+
+.equippedItem {
+  border: 3px solid rgb(212, 195, 42);
 }
 </style>
