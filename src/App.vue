@@ -128,7 +128,7 @@
             </span>
             <span v-else>
               <span
-                @mouseover="isMobile ? null : (equipmentHover = true)"
+                @mouseover="equipmentHover = true"
                 @mouseleave="equipmentHover = false"
               >
                 <button
@@ -367,6 +367,7 @@ export default {
       this.autoMine();
     }, 2000);
   },
+
   methods: {
     mine() {
       this.souls++;
@@ -427,6 +428,14 @@ export default {
     souls(souls) {
       localStorage.souls = souls;
     },
+  },
+
+  created() {
+    window.addEventListener("resize", this.mq);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.mq);
   },
 };
 </script>
