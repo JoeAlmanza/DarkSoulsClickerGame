@@ -112,6 +112,9 @@
                 >
                   <img class="btnImg" :src="item.imgUrl" />
                   <br />
+                  <b class="text-success price">
+                    ${{ Math.floor(item.cost) }}</b
+                  >
                   <span v-if="equipmentHover">
                     <b
                       ><u>{{ item.name }}</u></b
@@ -119,9 +122,6 @@
                     <br />
                     <p>{{ item.description }}</p>
                   </span>
-                  <b class="text-success price">
-                    ${{ Math.floor(item.cost) }}</b
-                  >
                 </button>
               </span>
             </span>
@@ -434,6 +434,7 @@ body {
   background-attachment: fixed;
   height: 100vh;
   font-family: Garamond, serif;
+  touch-action: manipulation;
 }
 
 img {
@@ -462,6 +463,7 @@ button {
   box-shadow: 2px 2px #6e6e6e, -2px -2px #6e6e6e, 2px -2px #6e6e6e,
     -2px 2px #6e6e6e;
   width: 115px;
+  touch-action: manipulation;
 }
 
 button:hover {
