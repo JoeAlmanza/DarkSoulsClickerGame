@@ -156,11 +156,11 @@
             <div class="row justify-content-center">
               <h2 class="text-center text-danger text-shadow">Auto Upgrades</h2>
               <div class="col-12">
-                <div
+                <span
                   @mouseover="isMobile ? null : (autoHover = true)"
                   @mouseleave="autoHover = false"
                 >
-                  <div v-if="!autoHover">
+                  <span v-if="!autoHover">
                     <button
                       class="m-1"
                       v-for="item in autoUpgrades"
@@ -183,8 +183,8 @@
                         <span class="equippedAmt">{{ item.quantity }}</span></b
                       >
                     </button>
-                  </div>
-                  <div v-if="autoHover">
+                  </span>
+                  <span v-if="autoHover">
                     <button
                       class="m-1"
                       v-for="item in autoUpgrades"
@@ -213,8 +213,8 @@
                         / 2 seconds)
                       </p>
                     </button>
-                  </div>
-                </div>
+                  </span>
+                </span>
               </div>
               <h2 class="text-center text-danger text-shadow">
                 Total:
